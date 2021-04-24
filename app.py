@@ -4,6 +4,8 @@ from flask_mysqldb import MySQL
 from settings import MYSQL_USER, MYSQL_PASSWORD, MYSQL_DB, MYSQL_HOST, MIN_BAL
 from utils import *
 from schemas import SCHEMAS
+from decimal import Decimal
+from logger import log_transaction_details
 
 app = Flask(__name__)
 app.config["MYSQL_USER"] = MYSQL_USER
@@ -31,7 +33,9 @@ def create_wallet():
             )
         mobile_number = req_body["mobileNumber"]
         amount = req_body["amount"]
-        if not validate_min_balance(amount, int(MIN_BAL)):
+        truncated_amount = truncate(amount, 2)
+
+        if not validate_min_balance(truncated_amount, int(MIN_BAL)):
             return (
                 jsonify(
                     {"message": "Account must maintain minimum balance: " + MIN_BAL}
@@ -43,9 +47,12 @@ def create_wallet():
             cur = db.connection.cursor()
             cur.execute(
                 "INSERT INTO user_wallets(mobile_number, balance) VALUES (%s, %s)",
-                (mobile_number, amount),
+                (mobile_number, truncated_amount),
             )
             db.connection.commit()
+            log_transaction_details(
+                db, mobile_number, 0, truncated_amount, truncated_amount, "NEW"
+            )
             return jsonify({"message": "Successfully created a wallet"}), 200
         except MySQLdb.Error as ex:
             if ex.args[0] == 1062:
@@ -106,7 +113,7 @@ def get_balance():
 
 
 @app.route("/creditMoney", methods=["POST"])
-def creditMoney():
+def credit_money():
     if request.method == "POST":
         req_body = request.json
         missing_params = check_for_missing_params(SCHEMAS["creditMoney"], req_body)
@@ -143,14 +150,23 @@ def creditMoney():
                 )
             curr_amount_float = convert_decimal_to_float(curr_amount[0])
             new_amount = calculate_amount(curr_amount_float, float(amount), "credit")
-            print(new_amount)
+            truncated_amount = truncate(new_amount, 2)
+            print(truncated_amount)
             try:
                 cur.execute(
                     "UPDATE user_wallets SET balance = %s WHERE mobile_number = %s",
-                    (new_amount, mobile_number),
+                    (truncated_amount, mobile_number),
                 )
                 db.connection.commit()
-                return jsonify({"newbalance": new_amount}), 200
+                log_transaction_details(
+                    db,
+                    mobile_number,
+                    curr_amount_float,
+                    truncated_amount,
+                    amount,
+                    "CREDIT",
+                )
+                return jsonify({"newBalance": truncated_amount}), 200
             except MySQLdb.Error as ex:
                 print(ex)
                 return jsonify({"message": "Error in updating wallet balance"}), 500
@@ -161,7 +177,7 @@ def creditMoney():
 
 
 @app.route("/debitMoney", methods=["POST"])
-def debitMoney():
+def debit_money():
     if request.method == "POST":
         req_body = request.json
         missing_params = check_for_missing_params(SCHEMAS["debitMoney"], req_body)
@@ -196,7 +212,8 @@ def debitMoney():
                 )
             curr_amount_float = convert_decimal_to_float(curr_amount[0])
             new_amount = calculate_amount(curr_amount_float, float(amount), "debit")
-            if not validate_min_balance(new_amount, int(MIN_BAL)):
+            truncated_amount = truncate(new_amount, 2)
+            if not validate_min_balance(truncated_amount, float(MIN_BAL)):
                 return (
                     jsonify(
                         {"message": "Account must maintain minimum balance: " + MIN_BAL}
@@ -206,10 +223,18 @@ def debitMoney():
             try:
                 cur.execute(
                     "UPDATE user_wallets SET balance = %s WHERE mobile_number = %s",
-                    (new_amount, mobile_number),
+                    (truncated_amount, mobile_number),
                 )
                 db.connection.commit()
-                return jsonify({"newbalance": new_amount}), 200
+                log_transaction_details(
+                    db,
+                    mobile_number,
+                    curr_amount_float,
+                    truncated_amount,
+                    amount,
+                    "DEBIT",
+                )
+                return jsonify({"newBalance": truncated_amount}), 200
             except MySQLdb.Error as ex:
                 print(ex)
                 return jsonify({"message": "Error in updating wallet balance"}), 500

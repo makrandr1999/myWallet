@@ -1,3 +1,10 @@
+import math
+
+
+def truncate(f, n):
+    return math.floor(f * 10 ** n) / 10 ** n
+
+
 def credit_amount(prev_amount, incoming_amount):
     return prev_amount + incoming_amount
 
