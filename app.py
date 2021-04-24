@@ -106,7 +106,6 @@ def get_balance():
                 )
             return jsonify({"balance": str(data[0])}), 200
         except MySQLdb.Error as ex:
-            print(ex)
             return jsonify({"message": "Error in fetching wallet balance"}), 500
         finally:
             cur.close()
@@ -151,7 +150,6 @@ def credit_money():
             curr_amount_float = convert_decimal_to_float(curr_amount[0])
             new_amount = calculate_amount(curr_amount_float, float(amount), "credit")
             truncated_amount = truncate(new_amount, 2)
-            print(truncated_amount)
             try:
                 cur.execute(
                     "UPDATE user_wallets SET balance = %s WHERE mobile_number = %s",
@@ -168,7 +166,6 @@ def credit_money():
                 )
                 return jsonify({"newBalance": truncated_amount}), 200
             except MySQLdb.Error as ex:
-                print(ex)
                 return jsonify({"message": "Error in updating wallet balance"}), 500
         except MySQLdb.Error as ex:
             return jsonify({"message": "Error in fetching wallet balance"}), 500
@@ -236,10 +233,8 @@ def debit_money():
                 )
                 return jsonify({"newBalance": truncated_amount}), 200
             except MySQLdb.Error as ex:
-                print(ex)
                 return jsonify({"message": "Error in updating wallet balance"}), 500
         except MySQLdb.Error as ex:
-            print(ex)
             return jsonify({"message": "Error in updating wallet balance"}), 500
         finally:
             cur.close()
