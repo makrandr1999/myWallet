@@ -1,0 +1,780 @@
+{
+	"variables": [],
+	"info": {
+		"name": "myWallet",
+		"_postman_id": "5e34ba70-6243-e86e-0f33-68358781c4c3",
+		"description": "API docs for myWallet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CREATE WALLET",
+			"request": {
+				"url": " http://127.0.0.1:5000/createWallet",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mobileNumber\" : \"9870818579\",\n\t\"amount\" : 502\n}"
+				},
+				"description": "API to create a wallet for a user"
+			},
+			"response": [
+				{
+					"id": "dc7a5295-1596-4e7c-8572-1ae094832235",
+					"name": "Success",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/createWallet",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobileNumber\" : \"9870818579\",\n\t\"amount\" : 502\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "49",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:26:14 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 288,
+					"body": "{\n  \"message\": \"Successfully created a wallet\"\n}\n"
+				},
+				{
+					"id": "e7ef57ff-3422-4285-bd98-065c4eac68ab",
+					"name": "Failure : Wallet already exists for user",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/createWallet",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobileNumber\" : \"9870818579\",\n\t\"amount\" : 501\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "62",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:28:22 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 223,
+					"body": "{\n  \"message\": \"Wallet already exists for user: 9870818579\"\n}\n"
+				},
+				{
+					"id": "3dda75b7-9c66-4c9a-8d3f-c753d83d8d2b",
+					"name": "Failure: Missing Params",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/createWallet",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\n}"
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "70",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:29:23 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 30,
+					"body": "{\n  \"message\": \"Missing request body param(s): mobileNumber amount\"\n}\n"
+				},
+				{
+					"id": "8c7d9c85-965e-4768-82ca-a2afc9a5de0a",
+					"name": "Failure: Minimum Balance check failed",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/createWallet",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobileNumber\" : \"9870818599\",\n\t\"amount\" : 69\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "62",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:33:40 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 29,
+					"body": "{\n  \"message\": \"Account must maintain minimum balance: 100\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "GET BALANCE",
+			"request": {
+				"url": " http://127.0.0.1:5000/getBalance",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mobileNumber\" : \"9870819511\"\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "22a3c420-0e53-4cd0-9698-f278bf7ff6e9",
+					"name": "SUCCESS",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/getBalance",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobileNumber\" : \"9870819511\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "26",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:30:26 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 59,
+					"body": "{\n  \"balance\": \"108.68\"\n}\n"
+				},
+				{
+					"id": "eb8603b1-9eeb-4d1c-9952-f093b2fe0fa8",
+					"name": "Failure : Wallet doesn't exist",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/getBalance",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobileNumber\" : \"9870819591\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "71",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:31:30 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 110,
+					"body": "{\n  \"message\": \"Wallet does not exist for the given user 9870819591\"\n}\n"
+				},
+				{
+					"id": "46dfec1c-53c3-4aeb-92c2-8150c16ab7be",
+					"name": "Failure : Missing params",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/getBalance",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\n}"
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "63",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:32:49 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 33,
+					"body": "{\n  \"message\": \"Missing request body param(s): mobileNumber\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "CREDIT MONEY",
+			"request": {
+				"url": " http://127.0.0.1:5000/creditMoney",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mobileNumber\" : \"9870819511\",\n\t\"amount\" : 22.2\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "3ff7f2e4-decc-4a81-a832-240f30081111",
+					"name": "Success",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/creditMoney",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobileNumber\" : \"9870819511\",\n\t\"amount\" : 22.2\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "27",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:36:10 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 285,
+					"body": "{\n  \"newBalance\": 153.07\n}\n"
+				},
+				{
+					"id": "245a7f8e-35c6-4ec4-8e8f-ea60a0350dc3",
+					"name": "Failure : Wallet doesn't exist",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/creditMoney",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobileNumber\" : \"9870819566\",\n\t\"amount\" : 22.2\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "70",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:36:45 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 57,
+					"body": "{\n  \"message\": \"Wallet does not exist for the given user9870819566\"\n}\n"
+				},
+				{
+					"id": "d98951ec-320f-4795-922c-7c04306d0e55",
+					"name": "Failure: Missing params",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/creditMoney",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobileNumber\" : \"9870819566\"\n}"
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "57",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:37:55 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 65,
+					"body": "{\n  \"message\": \"Missing request body param(s): amount\"\n}\n"
+				}
+			]
+		},
+		{
+			"name": "DEBIT MONEY",
+			"request": {
+				"url": " http://127.0.0.1:5000/debitMoney",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"mobileNumber\" : \"9870819511\",\n\t\"amount\" : 10\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "a515ef8e-594b-48a4-8c76-ff65f4822288",
+					"name": "Success",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/debitMoney",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "27",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:39:11 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 259,
+					"body": "{\n  \"newBalance\": 143.07\n}\n"
+				},
+				{
+					"id": "4563c3f7-db7c-4101-9136-e84d9e28bc7b",
+					"name": "Failure: Minimum Balance Check",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/debitMoney",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"mobileNumber\" : \"9870819511\",\n\t\"amount\" : 100\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "62",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:40:28 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 237,
+					"body": "{\n  \"message\": \"Account must maintain minimum balance: 100\"\n}\n"
+				},
+				{
+					"id": "1a47eabd-7b62-4442-b5f4-53891c087483",
+					"name": "Failure: Missing Params",
+					"originalRequest": {
+						"url": " http://127.0.0.1:5000/debitMoney",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"amount\" : 100\n}"
+						}
+					},
+					"status": "BAD REQUEST",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"name": "content-length",
+							"key": "content-length",
+							"value": "63",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"name": "content-type",
+							"key": "content-type",
+							"value": "application/json",
+							"description": "The mime type of this content"
+						},
+						{
+							"name": "date",
+							"key": "date",
+							"value": "Sat, 24 Apr 2021 14:43:26 GMT",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"name": "server",
+							"key": "server",
+							"value": "Werkzeug/1.0.1 Python/3.6.9",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 54,
+					"body": "{\n  \"message\": \"Missing request body param(s): mobileNumber\"\n}\n"
+				}
+			]
+		}
+	]
+}
