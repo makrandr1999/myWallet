@@ -129,7 +129,9 @@ def credit_money():
 
         mobile_number = req_body["mobileNumber"]
         amount = req_body["amount"]
-
+        if not validate_amount(amount):
+            return jsonify({"message": "Amount must be a positive value"}), 400
+        
         try:
             cur = db.connection.cursor()
             cur.execute(
